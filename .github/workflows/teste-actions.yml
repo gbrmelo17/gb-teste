@@ -23,4 +23,4 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            az account show
+            az vm create -n MyVm -g rg-infra-imoc-001 --image Ubuntu2204
