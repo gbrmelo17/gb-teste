@@ -1,6 +1,4 @@
-on:
-  workflow_dispatch:
-
+on: [push]
 jobs:
   create-vm:
     runs-on: ubuntu-latest
