@@ -1,16 +1,22 @@
+# File: .github/workflows/workflow.yml
+
 on: [push]
+
+name: Run Azure Login With a Service Principal Secret
+
 jobs:
-  create-vm:
+
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/login@v3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Create Ubuntu 24.04 LTS VM
-        run: |
-          az vm create --resource-group rg-infra-imoc-001 --name myUbuntuVM --image Ubuntu2404 --admin-username azureuser 
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
